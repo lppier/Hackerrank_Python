@@ -34,7 +34,7 @@ def sherlockAndAnagrams(s):
     sum = 0
     for i in ahash:
         n = ahash[i]
-        sum += (n*(n-1))/2
+        sum += (n*(n-1))/2 # triangular numbers
     print(sum)
     
     return int(sum)
