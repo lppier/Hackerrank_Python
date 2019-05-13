@@ -48,3 +48,31 @@ class LRUCache:
             self.item_dict[key] = value
             self.age_dict[key] = 0
 
+obj = LRUCache(1)
+print(obj.put(2, 1))
+print(obj.get(2))
+print(obj.put(3, 2))
+print(obj.get(2))
+print(obj.get(3))
+
+# OrderedDict Solution
+
+# from collections import OrderedDict
+
+# class LRUCache(OrderedDict):
+    
+#     def __init__(self, capacity):
+#         self.capacity = capacity
+        
+#     def get(self, key):
+#         if key not in self: 
+#             return -1
+#         self.move_to_end(key)
+#         return self[key]
+    
+#     def put(self, key, value):
+#         if key in self:
+#             self.move_to_end(key)
+#         self[key] = value
+#         if len(self) > self.capacity:
+#             self.popitem(last=False) # remove 1st, and oldest weapon
