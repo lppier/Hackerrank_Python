@@ -38,4 +38,49 @@ class Solution:
         
         island_search(grid)
         return self.isle_count
+
+# Breadth first search soln
+class Solution:
+    isle_count = 0 
+    
+    def numIslands(self, grid) -> int:
+        
+        r_dim = len(grid)
+        if r_dim != 0:
+            c_dim = len(grid[0])
+            
+        def bfs(g, r, c):
+            queue = []
+            g[r][c] = '0' # visited
+            queue.append((r, c)) # store vertices
+            
+            while queue:
+                curr_r, curr_c = queue.pop(0)
+                
+                # add all the neighbours, only add if it is 1
+                if curr_r-1 >= 0 and g[curr_r-1][curr_c]=='1':
+                    g[curr_r-1][curr_c] = '0' # visited
+                    queue.append((curr_r-1, curr_c))
+
+                if curr_r+1 < r_dim and g[curr_r+1][curr_c]=='1':
+                    g[curr_r+1][curr_c] = '0' # visited
+                    queue.append((curr_r+1, curr_c))
+
+                if curr_c-1 >= 0 and g[curr_r][curr_c-1]=='1':
+                    g[curr_r][curr_c-1] = '0' # visited
+                    queue.append((curr_r, curr_c-1))
+
+                if curr_c+1 < c_dim and g[curr_r][curr_c+1]=='1':
+                    g[curr_r][curr_c+1] = '0' # visited
+                    queue.append((curr_r, curr_c+1))
+
+        def island_search(g): # grid, row, col
+            for row in range(r_dim):
+                for col in range(c_dim):
+                    if grid[row][col]=='1':
+                        self.isle_count+= 1 # add an island whenever encounter a root
+                        bfs(grid, row, col)
+        
+        island_search(grid)
+        return self.isle_count
                 
